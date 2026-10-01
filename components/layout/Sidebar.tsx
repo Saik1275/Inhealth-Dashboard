@@ -17,7 +17,7 @@ export function Sidebar() {
   return (
     <div className="flex h-screen flex-col bg-[#0f172a] text-slate-300 w-64 shadow-xl border-r border-slate-800 relative z-20 transition-all duration-300">
       <div className="flex h-16 items-center border-b border-slate-800/60 px-6">
-        <Image src="/1735266317943.svg" alt="Logo" width={32} height={32} className="mr-3 rounded-md shadow-sm" />
+        <Image src="/1735266317943.jpg" alt="Logo" width={32} height={32} className="mr-3 rounded-md shadow-sm" />
         <span className="text-sm font-semibold tracking-wide text-white">PT Cipta Nirmala</span>
       </div>
       <nav className="flex-1 space-y-1.5 px-3 py-6 overflow-y-auto">
