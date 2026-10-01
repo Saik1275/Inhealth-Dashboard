@@ -398,7 +398,7 @@ export default function UploadPage() {
         const row = rawData[i];
         if (!row || !Array.isArray(row)) continue;
         const rowStr = row.join(" ").toLowerCase();
-        if (rowStr.includes("kategori") || rowStr.includes("penanggung") || rowStr.includes("instalasi") || rowStr.includes("penjualan")) {
+        if (rowStr.includes("kategori") || rowStr.includes("jenis kasus") || rowStr.includes("penanggung") || rowStr.includes("instalasi") || rowStr.includes("penjualan")) {
           headerRowIndex = i;
           headers = row.map((h) => String(h || "").trim());
           break;
@@ -451,7 +451,7 @@ export default function UploadPage() {
 
       const transactions: TransactionInsert[] = [];
       for (const row of jsonData) {
-        const kategori = String(findKey(row, ["Kategori Biaya", "Kategori"]));
+        const kategori = String(findKey(row, ["Kategori Biaya", "Kategori", "Jenis Kasus"]));
         const penanggung = String(findKey(row, ["Nama Penanggung Utama", "Penanggung Utama", "Penanggung"]));
         if (!kategori && !penanggung) continue;
         transactions.push({
