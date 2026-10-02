@@ -110,7 +110,7 @@ const KATEGORI_COLORS: Record<string, string> = {
 type BellField = "total_keseluruhan" | "total_penjualan_barang" | "total_penjualan_jasa" | "total_penjualan_fasilitas";
 
 const BELL_CONFIG: { field: BellField; label: string; color: string; accentClass: string }[] = [
-  { field: "total_keseluruhan", label: "Total Keseluruhan", color: "#3b82f6", accentClass: "blue" },
+  { field: "total_keseluruhan", label: "Total Penjualan", color: "#3b82f6", accentClass: "blue" },
   { field: "total_penjualan_barang", label: "Penjualan Barang", color: "#10b981", accentClass: "emerald" },
   { field: "total_penjualan_jasa", label: "Penjualan Jasa", color: "#f59e0b", accentClass: "amber" },
   { field: "total_penjualan_fasilitas", label: "Penjualan Fasilitas", color: "#8b5cf6", accentClass: "violet" },
@@ -187,19 +187,18 @@ function BellCurveCard({ allData, field, label, color }: BellCurveCardProps) {
           <CardTitle className="text-sm font-semibold text-slate-700">
             Distribusi Normal – {label}
           </CardTitle>
-          <div className="flex gap-1 flex-wrap">
-            {availableKategori.map((k) => (
-              <button
-                key={k}
-                onClick={() => setSelectedKategori(k)}
-                className={`px-2.5 py-1 rounded-full text-xs font-medium transition-all ${selectedKategori === k
-                  ? "bg-slate-800 text-white shadow-sm"
-                  : "bg-slate-100 text-slate-500 hover:bg-slate-200"
-                  }`}
-              >
-                {k}
-              </button>
-            ))}
+          <div className="mt-2 sm:mt-0">
+            <select
+              value={selectedKategori}
+              onChange={(e) => setSelectedKategori(e.target.value)}
+              className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all max-w-[200px]"
+            >
+              {availableKategori.map((k) => (
+                <option key={k} value={k}>
+                  {k}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </CardHeader>
@@ -924,14 +923,6 @@ export default function Dashboard() {
 
           {/* ── Row 5: Bell Curve Charts ── */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex-1 h-px bg-slate-200" />
-              <h2 className="text-sm font-semibold text-slate-500 uppercase tracking-wider whitespace-nowrap">Distribusi Normal (Diagram Lonceng)</h2>
-              <div className="flex-1 h-px bg-slate-200" />
-            </div>
-            <p className="text-xs text-slate-400 mb-5 text-center">
-              Pilih kategori biaya pada masing-masing kartu untuk melihat distribusi per kelompok
-            </p>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {BELL_CONFIG.map(({ field, label, color }) => (
                 <BellCurveCard
