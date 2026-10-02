@@ -682,7 +682,7 @@ export default function UploadPage() {
                 <p className="text-sm font-medium text-slate-600">Klik untuk memilih file Excel</p>
                 <p className="text-xs text-slate-400 mt-1">
                   Format: .xlsx / .xls<br />
-                  Kolom wajib: "nomor tagihan", "kategori biasa/jenis kasus", "penanggung jawab utama", "instalasi", "jenis layanan", "penjualan barang", "penjualan jasa", dan "penjualan fasilitas".<br />
+                  Kolom wajib: "nomor tagihan", "kategori biaya/jenis kasus", "penanggung jawab utama", "instalasi", "jenis layanan", "penjualan barang", "penjualan jasa", dan "penjualan fasilitas".<br />
                   <span className="text-amber-400">Nama kolom harus sesuai dengan ketentuan di atas agar data dapat dibaca oleh sistem.</span>
                 </p>
 
