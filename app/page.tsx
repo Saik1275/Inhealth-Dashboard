@@ -369,14 +369,33 @@ export default function Dashboard() {
       const datasetIds = datasets.map((d) => d.id);
 
       // Fetch all transactions for matched datasets
-      const { data: transactions, error } = await supabase
-        .from("transactions")
-        .select("*")
-        .in("dataset_id", datasetIds);
+      let allTransactions: Transaction[] = [];
+      let page = 0;
+      const pageSize = 1000;
+      let hasMore = true;
 
-      if (error) throw error;
+      while (hasMore) {
+        const { data: transactions, error } = await supabase
+          .from("transactions")
+          .select("*")
+          .in("dataset_id", datasetIds)
+          .range(page * pageSize, (page + 1) * pageSize - 1);
 
-      const txns = transactions || [];
+        if (error) throw error;
+
+        if (transactions && transactions.length > 0) {
+          allTransactions = [...allTransactions, ...transactions];
+          if (transactions.length < pageSize) {
+            hasMore = false;
+          } else {
+            page++;
+          }
+        } else {
+          hasMore = false;
+        }
+      }
+
+      const txns = allTransactions || [];
       setAllData(txns);
 
       // Build filter dropdown options from fetched data
